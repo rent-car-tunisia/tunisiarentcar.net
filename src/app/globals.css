@@ -1,0 +1,456 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════
+   Location Voiture Tunisie 24/7 — Deep Navy Design System
+   ═══════════════════════════════════════════════════════════════════ */
+
+@theme {
+    /* Core Colors — Navy Palette */
+    --color-primary: #00256f;
+    --color-primary-container: #1a3c8f;
+    --color-primary-fixed: #dbe1ff;
+    --color-on-primary: #ffffff;
+    --color-on-primary-container: #92abff;
+
+    --color-background: #f7f9fc;
+    --color-foreground: #191c1e;
+
+    --color-accent: #00256f;
+    --color-accent-dark: #1a3c8f;
+
+    --color-surface: #f7f9fc;
+    --color-surface-container-low: #f2f4f7;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-highest: #e0e3e6;
+
+    --color-on-surface: #191c1e;
+    --color-on-surface-variant: #444651;
+    --color-outline-variant: #c4c6d3;
+
+    --color-muted: #444651;
+    --color-muted-foreground: #717171;
+    --color-border: #e0e3e6;
+    --color-card: #ffffff;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --shadow-card: 0 6px 20px rgba(0, 0, 0, 0.08);
+
+    /* Border Radius — Tighter/sharper per stitch */
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --radius-full: 9999px;
+
+    /* Font families */
+    --font-headline: "Manrope", system-ui, sans-serif;
+    --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+:root {
+    --background: #f7f9fc;
+    --foreground: #191c1e;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Base Styles
+   ═══════════════════════════════════════════════════════════════════ */
+
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+        font-family: var(--font-body);
+        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-headline);
+        font-weight: 800;
+        line-height: 1.2;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Utility Classes
+   ═══════════════════════════════════════════════════════════════════ */
+
+@layer utilities {
+    .font-headline {
+        font-family: var(--font-headline);
+    }
+
+    .font-body {
+        font-family: var(--font-body);
+    }
+
+    /* Container */
+    .container-narrow {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    /* Card Styles */
+    .card {
+        background: var(--color-card);
+        border-radius: 0.75rem;
+    }
+
+    .card-hover {
+        transition: transform 0.5s ease;
+    }
+
+    .card-hover:hover {
+        transform: translateY(-8px);
+    }
+
+    /* Button Styles */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-weight: 700;
+        transition: all 0.15s ease;
+        cursor: pointer;
+        border: none;
+        border-radius: 0.5rem;
+    }
+
+    .btn-primary {
+        background: linear-gradient(to right, #00256f, #1a3c8f);
+        color: white;
+        padding: 16px 24px;
+        font-size: 16px;
+        box-shadow: 0 8px 30px rgba(0, 37, 111, 0.2);
+    }
+
+    .btn-primary:hover {
+        transform: scale(0.98);
+    }
+
+    .btn-secondary {
+        background: var(--color-foreground);
+        color: white;
+        padding: 14px 24px;
+        font-size: 16px;
+    }
+
+    .btn-secondary:hover {
+        background: #333333;
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: #00256f;
+        border: 2px solid rgba(0, 37, 111, 0.1);
+        padding: 14px 24px;
+        font-size: 16px;
+    }
+
+    .btn-outline:hover {
+        background: #00256f;
+        color: white;
+        border-color: #00256f;
+    }
+
+    /* Input Styles */
+    .input {
+        width: 100%;
+        padding: 8px 0 8px 28px;
+        border: none;
+        border-bottom: 2px solid #e0e3e6;
+        font-size: 16px;
+        font-weight: 600;
+        color: #191c1e;
+        background: transparent;
+        transition: border-color 0.15s ease;
+    }
+
+    .input:focus {
+        outline: none;
+        border-bottom-color: #00256f;
+    }
+
+    .input::placeholder {
+        color: var(--color-muted-foreground);
+    }
+
+    /* Label */
+    .label {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #444651;
+        margin-bottom: 8px;
+        font-family: var(--font-body);
+    }
+
+    /* Divider */
+    .divider {
+        height: 1px;
+        background: var(--color-border);
+    }
+
+    /* Badge */
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border-radius: 0.5rem;
+        background: #00256f;
+        color: white;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .badge-accent {
+        background: rgba(0, 37, 111, 0.1);
+        color: #00256f;
+    }
+
+    /* Trust Text */
+    .text-trust {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: var(--color-muted);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Animation Classes
+   ═══════════════════════════════════════════════════════════════════ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-up {
+    animation: slideUp 0.3s ease forwards;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Custom Form Inputs
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #e5e7eb transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Date Input */
+input[type="date"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+    display: none;
+}
+
+/* Select */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+    padding-right: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23444651' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+}
+
+select:focus {
+    outline: none;
+}
+
+select option {
+    background: white;
+    color: #191c1e;
+    padding: 10px;
+}
+
+/* Form Field — Bottom-border style for floating search */
+.form-field {
+    position: relative;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #e0e3e6;
+    padding: 0;
+    padding-bottom: 8px;
+    transition: border-color 0.2s ease;
+    overflow: visible;
+    border-radius: 0;
+}
+
+.form-field:hover {
+    border-bottom-color: #c4c6d3;
+}
+
+.form-field:focus-within {
+    border-bottom-color: #00256f;
+}
+
+.form-field-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #444651;
+    margin-bottom: 4px;
+    font-family: var(--font-body);
+}
+
+.form-field-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #191c1e;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Checkout Phone Input (react-phone-number-input)
+   ═══════════════════════════════════════════════════════════════════ */
+
+.phone-input-checkout.PhoneInput {
+    display: flex;
+    gap: 6px;
+}
+
+.phone-input-checkout .PhoneInputCountry {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+}
+
+.phone-input-checkout .PhoneInputCountry:hover {
+    border-color: #d1d5db;
+}
+
+.phone-input-checkout .PhoneInputCountryIcon {
+    width: 22px;
+    height: 16px;
+}
+
+.phone-input-checkout .PhoneInputCountryIcon--border {
+    box-shadow: none;
+    background: none;
+}
+
+.phone-input-checkout .PhoneInputCountrySelectArrow {
+    margin-left: 4px;
+    width: 5px;
+    height: 5px;
+    border-color: #6b7280;
+    opacity: 1;
+}
+
+.phone-input-checkout .PhoneInputInput {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    outline: none;
+    transition: all 0.15s ease;
+}
+
+.phone-input-checkout .PhoneInputInput:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px rgba(0, 37, 111, 0.1);
+}
