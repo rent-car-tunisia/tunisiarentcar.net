@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+mport type { Metadata } from "next";
 import { Raleway, Lato } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
