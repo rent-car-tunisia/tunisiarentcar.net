@@ -1,4 +1,4 @@
-mport type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Raleway, Lato } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
@@ -81,7 +81,6 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    // Fetch live contact info from DB (phone, whatsapp)
     const dbConfig = await getSiteConfig();
     const phoneDisplay: string = (dbConfig?.phoneDisplay as string | null | undefined) ?? siteConfig.contact.phone.display;
     const phoneWhatsapp: string = (dbConfig?.whatsapp as string | null | undefined) ?? siteConfig.contact.phone.whatsapp;
@@ -102,7 +101,6 @@ export default async function RootLayout({
                 {/* Preconnect to Google Fonts for faster loading */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                {/* Material Symbols for icons — loaded async to avoid render-blocking */}
                 <link
                     rel="preload"
                     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
