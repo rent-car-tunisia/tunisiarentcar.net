@@ -28,16 +28,20 @@ const CITY_NAMES: Record<string, string> = {
     nabeul: "Nabeul",
 };
 
+const FALLBACK_CITIES = Object.keys(CITY_NAMES);
+
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
     const [cars, cities] = await Promise.all([getCars(), getCities()]);
-    const params: { city: string; "car-slug": string }[] = [];
+    const citySlugs = cities.length > 0
+        ? cities.map(c => c.slug)
+        : FALLBACK_CITIES;
 
-    cities.forEach((city) => {
+    const params: { city: string; "car-slug": string }[] = [];
+    citySlugs.forEach((citySlug) => {
         cars.forEach((car: Car) => {
-            params.push({
-                city: city.slug,
-                "car-slug": car.slug,
-            });
+            params.push({ city: citySlug, "car-slug": car.slug });
         });
     });
 
