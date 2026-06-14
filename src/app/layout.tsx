@@ -99,7 +99,7 @@ export default async function RootLayout({
                         --site-icon-tint: ${siteConfig.theme.onPrimaryContainer};
                     }
                 `}</style>
-                {/* Preconnect to Google Fonts for faster loading */} for faster loading */}
+                {/* Preconnect to Google Fonts for faster loading */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 {/* Material Symbols for icons — loaded async to avoid render-blocking */}
