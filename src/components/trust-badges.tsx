@@ -9,8 +9,8 @@ export function TrustBadges() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
                     {badges.map((badge, i) => (
                         <div key={i} className="flex flex-col items-center">
-                            <div className="w-20 h-20 bg-[#dbe1ff] rounded-full flex items-center justify-center mb-6">
-                                <span className="material-symbols-outlined text-[#00256f] text-4xl">
+                            <div className="w-20 h-20 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: 'color-mix(in srgb, var(--site-primary) 15%, white)' }}>
+                                <span className="material-symbols-outlined text-4xl" style={{ color: 'var(--site-primary)' }}>
                                     {badge.icon}
                                 </span>
                             </div>

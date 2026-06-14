@@ -111,7 +111,7 @@ export function ServicesScroll() {
         <section className="bg-[#f2f4f7] py-24">
             {/* Header */}
             <div className="max-w-screen-2xl mx-auto px-6 md:px-12 mb-12">
-                <p className="font-body text-sm font-bold tracking-widest uppercase text-[#00256f] mb-2">
+                <p className="font-body text-sm font-bold tracking-widest uppercase mb-2" style={{ color: 'var(--site-primary)' }}>
                     Nos Services
                 </p>
                 <h2 className="font-headline text-3xl md:text-4xl font-extrabold text-[#191c1e]">
@@ -138,7 +138,7 @@ export function ServicesScroll() {
                             key={i}
                             className="flex-shrink-0 w-80 bg-white p-8 rounded-xl shadow-sm transition-shadow duration-300 hover:shadow-md"
                         >
-                            <span className="material-symbols-outlined text-[#00256f] text-4xl mb-6 block">
+                            <span className="material-symbols-outlined text-4xl mb-6 block" style={{ color: 'var(--site-primary)' }}>
                                 {service.icon}
                             </span>
                             <h3 className="font-headline text-xl font-bold text-[#191c1e] mb-3">
