@@ -1,4 +1,4 @@
-// ═══════════════════════════════════════════════════════════════════
+﻿// ═══════════════════════════════════════════════════════════════════
 // Site Configuration — Tunisia Rent Car
 // Domain: tunisiarentcar.net | EN | International
 // ═══════════════════════════════════════════════════════════════════
@@ -182,13 +182,15 @@ export const siteConfig = {
     },
 
     theme: {
-        primary: "#00256f",
-        primaryContainer: "#1a3c8f",
+        heroVariant: "split",   // "overlay" | "split"
+        cardVariant: "outlined",   // "default" | "outlined"
+        primary: "#0f766e",
+        primaryContainer: "#115e59",
         primaryFixed: "#dbe1ff",
         onPrimary: "#ffffff",
-        onPrimaryContainer: "#92abff",
-        accent: "#00256f",
-        accentDark: "#1a3c8f",
+        onPrimaryContainer: "#5eead4",
+        accent: "#0f766e",
+        accentDark: "#115e59",
         background: "#f7f9fc",
         surface: "#f7f9fc",
         surfaceContainerLow: "#f2f4f7",
@@ -197,7 +199,7 @@ export const siteConfig = {
         onSurface: "#191c1e",
         onSurfaceVariant: "#444651",
         outlineVariant: "#c4c6d3",
-        footerBg: "#172554",
+        footerBg: "#042f2e",
     },
 } as const;
 

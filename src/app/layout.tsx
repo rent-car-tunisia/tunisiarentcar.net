@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
+﻿import type { Metadata } from "next";
+import { Raleway, Lato } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -7,16 +7,16 @@ import { CurrencyProvider } from "@/context/currency-context";
 import { siteConfig, ogImageUrl } from "@/lib/site-config";
 import { getSiteConfig } from "@/lib/get-site-data";
 
-const manrope = Manrope({
+const raleway = Raleway({
     subsets: ["latin"],
     weight: ["700", "800"],
     variable: "--font-headline",
     display: "swap",
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
+const lato = Lato({
     subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
+    weight: ["400", "700"],
     variable: "--font-body",
     display: "swap",
 });
@@ -89,7 +89,17 @@ export default async function RootLayout({
     return (
         <html lang={siteConfig.lang} suppressHydrationWarning>
             <head>
-                {/* Preconnect to Google Fonts for faster loading */}
+                {/* Site brand CSS variables — drives all themed colors */}
+                <style>{`
+                    :root {
+                        --site-primary: ${siteConfig.theme.primary};
+                        --site-primary-dark: ${siteConfig.theme.primaryContainer};
+                        --site-accent: ${siteConfig.theme.accent};
+                        --site-footer-bg: ${siteConfig.theme.footerBg};
+                        --site-icon-tint: ${siteConfig.theme.onPrimaryContainer};
+                    }
+                `}</style>
+                {/* Preconnect to Google Fonts for faster loading */} for faster loading */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 {/* Material Symbols for icons — loaded async to avoid render-blocking */}
@@ -116,7 +126,7 @@ export default async function RootLayout({
                     />
                 </noscript>
             </head>
-            <body className={`${manrope.variable} ${plusJakarta.variable} font-body`}>
+            <body className={`${raleway.variable} ${lato.variable} font-body`}>
                 <CurrencyProvider>
                     <Navbar phoneDisplay={phoneDisplay} phoneWhatsappUrl={phoneWhatsappUrl} />
                     <main>{children}</main>

@@ -55,7 +55,7 @@ export function Navbar({ phoneDisplay, phoneWhatsappUrl }: NavbarProps = {}) {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className="font-headline text-sm font-semibold text-slate-600 hover:text-blue-900 transition-colors duration-300"
+                                    className="font-headline text-sm font-semibold text-slate-600 transition-colors duration-300 hover:opacity-80" style={{ '--tw-hover-color': 'var(--site-primary)' } as React.CSSProperties}
                                 >
                                     {link.label}
                                 </Link>
@@ -69,7 +69,7 @@ export function Navbar({ phoneDisplay, phoneWhatsappUrl }: NavbarProps = {}) {
                                 href={callUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 text-blue-900 font-semibold"
+                                className="flex items-center gap-2 font-semibold" style={{ color: 'var(--site-primary)' }}
                             >
                                 <span className="material-symbols-outlined text-xl">call</span>
                                 {displayPhone}
@@ -113,7 +113,7 @@ export function Navbar({ phoneDisplay, phoneWhatsappUrl }: NavbarProps = {}) {
                                 href={callUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-3 text-lg font-semibold text-blue-900"
+                                className="flex items-center gap-3 text-lg font-semibold" style={{ color: 'var(--site-primary)' }}
                             >
                                 <span className="material-symbols-outlined">call</span>
                                 {displayPhone}

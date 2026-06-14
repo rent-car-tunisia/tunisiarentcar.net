@@ -27,7 +27,7 @@ export function Footer({ phoneDisplay, phoneWhatsappUrl }: FooterProps = {}) {
     const callUrl = phoneWhatsappUrl ?? whatsappUrl;
     const serviceLinks = siteConfig.content.footer.serviceLinks as readonly { name: string; href: string }[];
     return (
-        <footer className="bg-blue-950 text-white">
+        <footer className="text-white" style={{ backgroundColor: 'var(--site-footer-bg)' }}>
             <div className="max-w-screen-2xl mx-auto px-6 md:px-12 py-24">
                 {/* 4-column grid */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -113,19 +113,19 @@ export function Footer({ phoneDisplay, phoneWhatsappUrl }: FooterProps = {}) {
                         </h4>
                         <div className="space-y-5">
                             <a href={callUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
-                                <span className="material-symbols-outlined text-[#92abff] text-xl">call</span>
+                                <span className="material-symbols-outlined text-[var(--site-icon-tint)] text-xl">call</span>
                                 <span className="text-slate-300 text-sm group-hover:text-white transition-colors">
                                     {displayPhone}
                                 </span>
                             </a>
                             <a href={mailtoUrl} className="flex items-center gap-3 group">
-                                <span className="material-symbols-outlined text-[#92abff] text-xl">mail</span>
+                                <span className="material-symbols-outlined text-[var(--site-icon-tint)] text-xl">mail</span>
                                 <span className="text-slate-300 text-sm group-hover:text-white transition-colors">
                                     {siteConfig.contact.email}
                                 </span>
                             </a>
                             <div className="flex items-center gap-3">
-                                <span className="material-symbols-outlined text-[#92abff] text-xl">location_on</span>
+                                <span className="material-symbols-outlined text-[var(--site-icon-tint)] text-xl">location_on</span>
                                 <span className="text-slate-300 text-sm">
                                     {siteConfig.contact.address.displayShort}
                                 </span>
@@ -136,7 +136,7 @@ export function Footer({ phoneDisplay, phoneWhatsappUrl }: FooterProps = {}) {
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-3 group"
                             >
-                                <span className="material-symbols-outlined text-[#92abff] text-xl">chat</span>
+                                <span className="material-symbols-outlined text-[var(--site-icon-tint)] text-xl">chat</span>
                                 <span className="text-slate-300 text-sm group-hover:text-white transition-colors">
                                     WhatsApp
                                 </span>

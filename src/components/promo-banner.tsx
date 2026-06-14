@@ -5,7 +5,7 @@ export function PromoBanner() {
     return (
         <section className="bg-[#f7f9fc] py-24 px-6 md:px-12">
             <div className="max-w-screen-2xl mx-auto">
-                <div className="bg-[#00256f] rounded-2xl overflow-hidden flex flex-col md:flex-row items-center">
+                <div className="rounded-2xl overflow-hidden flex flex-col md:flex-row items-center" style={{ backgroundColor: 'var(--site-primary)' }}>
                     {/* Left half — text */}
                     <div className="w-full md:w-1/2 p-12 md:p-20">
                         {/* Badge pill */}
@@ -17,7 +17,7 @@ export function PromoBanner() {
                             {siteConfig.content.promo.h2}
                         </h2>
 
-                        <p className="font-body text-[#92abff] text-lg mb-10 opacity-90">
+                        <p className="font-body text-lg mb-10 opacity-90" style={{ color: 'var(--site-icon-tint)' }}>
                             {siteConfig.content.promo.subtitle}
                         </p>
 
@@ -37,7 +37,16 @@ export function PromoBanner() {
                             {/* CTA */}
                             <Link
                                 href="/nos-voitures"
-                                className="bg-white text-[#00256f] px-8 py-4 rounded-lg font-bold hover:bg-[#92abff] hover:text-white transition-colors"
+                                className="bg-white px-8 py-4 rounded-lg font-bold transition-colors"
+                                style={{ color: 'var(--site-primary)' }}
+                                onMouseEnter={(e) => {
+                                    (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--site-icon-tint)';
+                                    (e.currentTarget as HTMLElement).style.color = 'white';
+                                }}
+                                onMouseLeave={(e) => {
+                                    (e.currentTarget as HTMLElement).style.backgroundColor = 'white';
+                                    (e.currentTarget as HTMLElement).style.color = 'var(--site-primary)';
+                                }}
                             >
                                 {siteConfig.content.promo.cta}
                             </Link>

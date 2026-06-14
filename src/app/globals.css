@@ -53,6 +53,12 @@
 :root {
     --background: #f7f9fc;
     --foreground: #191c1e;
+    /* Site brand tokens — injected per site by layout.tsx via siteConfig.theme */
+    --site-primary: #00256f;
+    --site-primary-dark: #1a3c8f;
+    --site-accent: #00256f;
+    --site-footer-bg: #172554;
+    --site-icon-tint: #92abff;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -129,11 +135,11 @@
     }
 
     .btn-primary {
-        background: linear-gradient(to right, #00256f, #1a3c8f);
+        background: linear-gradient(to right, var(--site-primary), var(--site-primary-dark));
         color: white;
         padding: 16px 24px;
         font-size: 16px;
-        box-shadow: 0 8px 30px rgba(0, 37, 111, 0.2);
+        box-shadow: 0 8px 30px color-mix(in srgb, var(--site-primary) 20%, transparent);
     }
 
     .btn-primary:hover {
@@ -153,16 +159,16 @@
 
     .btn-outline {
         background: transparent;
-        color: #00256f;
-        border: 2px solid rgba(0, 37, 111, 0.1);
+        color: var(--site-primary);
+        border: 2px solid color-mix(in srgb, var(--site-primary) 15%, transparent);
         padding: 14px 24px;
         font-size: 16px;
     }
 
     .btn-outline:hover {
-        background: #00256f;
+        background: var(--site-primary);
         color: white;
-        border-color: #00256f;
+        border-color: var(--site-primary);
     }
 
     /* Input Styles */
@@ -180,7 +186,7 @@
 
     .input:focus {
         outline: none;
-        border-bottom-color: #00256f;
+        border-bottom-color: var(--site-primary);
     }
 
     .input::placeholder {
@@ -215,14 +221,14 @@
         letter-spacing: 0.1em;
         text-transform: uppercase;
         border-radius: 0.5rem;
-        background: #00256f;
+        background: var(--site-primary);
         color: white;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     }
 
     .badge-accent {
-        background: rgba(0, 37, 111, 0.1);
-        color: #00256f;
+        background: color-mix(in srgb, var(--site-primary) 10%, transparent);
+        color: var(--site-primary);
     }
 
     /* Trust Text */
@@ -376,7 +382,7 @@ select option {
 }
 
 .form-field:focus-within {
-    border-bottom-color: #00256f;
+    border-bottom-color: var(--site-primary);
 }
 
 .form-field-label {
@@ -451,6 +457,6 @@ select option {
 }
 
 .phone-input-checkout .PhoneInputInput:focus {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 2px rgba(0, 37, 111, 0.1);
+    border-color: var(--site-primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--site-primary) 10%, transparent);
 }
