@@ -2,9 +2,6 @@
   "framework": "nextjs",
   "buildCommand": "npm run build",
   "installCommand": "npm ci",
-  "env": {
-    "SITE_SLUG": "location-voiture-tunisie-24-7"
-  },
   "headers": [
     {
       "source": "/(.*)",
