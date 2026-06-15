@@ -18,6 +18,12 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'http',
+                hostname: '65.108.92.154',
+                port: '8088',
+                pathname: '/uploads/**',
+            },
+            {
+                protocol: 'http',
                 hostname: 'nhrentcar.com',
                 pathname: '/wp-content/uploads/**',
             },

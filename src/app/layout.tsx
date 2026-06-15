@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Raleway, Lato } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -7,74 +7,79 @@ import { CurrencyProvider } from "@/context/currency-context";
 import { siteConfig, ogImageUrl } from "@/lib/site-config";
 import { getSiteConfig } from "@/lib/get-site-data";
 
-const raleway = Raleway({
+const playfair = Playfair_Display({
     subsets: ["latin"],
     weight: ["700", "800"],
     variable: "--font-headline",
     display: "swap",
 });
 
-const lato = Lato({
+const inter = Inter({
     subsets: ["latin"],
-    weight: ["400", "700"],
+    weight: ["400", "500", "600", "700"],
     variable: "--font-body",
     display: "swap",
 });
 
-export const metadata: Metadata = {
-    title: {
-        default: siteConfig.seo.titleDefault,
-        template: siteConfig.seo.titleTemplate,
-    },
-    description: siteConfig.seo.description,
-    keywords: siteConfig.seo.keywords as unknown as string[],
-    authors: [{ name: siteConfig.brand.name }],
-    creator: siteConfig.brand.name,
-    publisher: siteConfig.brand.name,
-    robots: {
-        index: true,
-        follow: true,
-        googleBot: {
+export async function generateMetadata(): Promise<Metadata> {
+    const dbConfig = await getSiteConfig();
+    const dynamicOgImg = (dbConfig?.ogImage as string | null) ?? ogImageUrl;
+    const brandName = (dbConfig?.brandName as string | null) ?? siteConfig.brand.name;
+    return {
+        title: {
+            default: (dbConfig?.seoTitleDefault as string | null) ?? siteConfig.seo.titleDefault,
+            template: (dbConfig?.seoTitleTemplate as string | null) ?? siteConfig.seo.titleTemplate,
+        },
+        description: (dbConfig?.seoDescription as string | null) ?? siteConfig.seo.description,
+        keywords: ((dbConfig?.seoKeywords as string[] | null) ?? siteConfig.seo.keywords) as unknown as string[],
+        authors: [{ name: brandName }],
+        creator: brandName,
+        publisher: brandName,
+        robots: {
             index: true,
             follow: true,
-            'max-video-preview': -1,
-            'max-image-preview': 'large',
-            'max-snippet': -1,
+            googleBot: {
+                index: true,
+                follow: true,
+                'max-video-preview': -1,
+                'max-image-preview': 'large',
+                'max-snippet': -1,
+            },
         },
-    },
-    alternates: {
-        canonical: siteConfig.url.baseUrl,
-        languages: {
-            [`${siteConfig.seo.language}-TN`]: siteConfig.url.baseUrl,
+        alternates: {
+            canonical: siteConfig.url.baseUrl,
+            languages: {
+                [`${siteConfig.seo.language}-TN`]: siteConfig.url.baseUrl,
+            },
         },
-    },
-    openGraph: {
-        title: siteConfig.content.meta.ogTitle,
-        description: siteConfig.content.meta.ogDesc,
-        type: "website",
-        locale: siteConfig.seo.locale,
-        url: siteConfig.url.baseUrl,
-        siteName: siteConfig.brand.name,
-        images: [
-            {
-                url: ogImageUrl,
-                width: 1200,
-                height: 630,
-                alt: siteConfig.content.meta.ogImageAlt,
-            }
-        ],
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: siteConfig.content.meta.ogTitle,
-        description: siteConfig.content.meta.ogDesc,
-        images: [ogImageUrl],
-    },
-    verification: {
-        google: siteConfig.seo.googleVerification,
-    },
-    category: "travel",
-};
+        openGraph: {
+            title: siteConfig.content.meta.ogTitle,
+            description: siteConfig.content.meta.ogDesc,
+            type: "website",
+            locale: (dbConfig?.seoLocale as string | null) ?? siteConfig.seo.locale,
+            url: siteConfig.url.baseUrl,
+            siteName: brandName,
+            images: [
+                {
+                    url: dynamicOgImg,
+                    width: 1200,
+                    height: 630,
+                    alt: siteConfig.content.meta.ogImageAlt,
+                }
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: siteConfig.content.meta.ogTitle,
+            description: siteConfig.content.meta.ogDesc,
+            images: [dynamicOgImg],
+        },
+        verification: {
+            google: (dbConfig?.seoGoogleVerification as string | null) ?? siteConfig.seo.googleVerification,
+        },
+        category: "travel",
+    };
+}
 
 export default async function RootLayout({
     children,
@@ -85,17 +90,30 @@ export default async function RootLayout({
     const phoneDisplay: string = (dbConfig?.phoneDisplay as string | null | undefined) ?? siteConfig.contact.phone.display;
     const phoneWhatsapp: string = (dbConfig?.whatsapp as string | null | undefined) ?? siteConfig.contact.phone.whatsapp;
     const phoneWhatsappUrl: string = `https://wa.me/${phoneWhatsapp}`;
+
+    // Dynamic theme colors — admin panel overrides static siteConfig values
+    const colors = (dbConfig?.themeColors ?? {}) as Record<string, string>;
+    const primary     = colors.primary             ?? siteConfig.theme.primary;
+    const primaryDark = colors.primaryContainer    ?? colors.primary_container    ?? siteConfig.theme.primaryContainer;
+    const accent      = colors.accent              ?? siteConfig.theme.accent;
+    const footerBg    = colors.footerBg            ?? colors.footer_bg            ?? siteConfig.theme.footerBg;
+    const iconTint    = colors.onPrimaryContainer  ?? colors.on_primary_container ?? siteConfig.theme.onPrimaryContainer;
+
+    // Dynamic logos — admin panel overrides static siteConfig values
+    const logoSrc      = (dbConfig?.logoMain  as string | null) ?? siteConfig.logo.main;
+    const logoWhiteSrc = (dbConfig?.logoWhite as string | null) ?? siteConfig.logo.white;
+
     return (
         <html lang={siteConfig.lang} suppressHydrationWarning>
             <head>
                 {/* Site brand CSS variables — drives all themed colors */}
                 <style>{`
                     :root {
-                        --site-primary: ${siteConfig.theme.primary};
-                        --site-primary-dark: ${siteConfig.theme.primaryContainer};
-                        --site-accent: ${siteConfig.theme.accent};
-                        --site-footer-bg: ${siteConfig.theme.footerBg};
-                        --site-icon-tint: ${siteConfig.theme.onPrimaryContainer};
+                        --site-primary: ${primary};
+                        --site-primary-dark: ${primaryDark};
+                        --site-accent: ${accent};
+                        --site-footer-bg: ${footerBg};
+                        --site-icon-tint: ${iconTint};
                     }
                 `}</style>
                 {/* Preconnect to Google Fonts for faster loading */}
@@ -124,11 +142,11 @@ export default async function RootLayout({
                     />
                 </noscript>
             </head>
-            <body className={`${raleway.variable} ${lato.variable} font-body`}>
+            <body className={`${playfair.variable} ${inter.variable} font-body`}>
                 <CurrencyProvider>
-                    <Navbar phoneDisplay={phoneDisplay} phoneWhatsappUrl={phoneWhatsappUrl} />
+                    <Navbar phoneDisplay={phoneDisplay} phoneWhatsappUrl={phoneWhatsappUrl} logoSrc={logoSrc} />
                     <main>{children}</main>
-                    <Footer phoneDisplay={phoneDisplay} phoneWhatsappUrl={phoneWhatsappUrl} />
+                    <Footer phoneDisplay={phoneDisplay} phoneWhatsappUrl={phoneWhatsappUrl} logoWhiteSrc={logoWhiteSrc} />
                 </CurrencyProvider>
             </body>
         </html>

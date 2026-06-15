@@ -20,11 +20,13 @@ const CITY_LINKS = [
 interface FooterProps {
     phoneDisplay?: string;
     phoneWhatsappUrl?: string;
+    logoWhiteSrc?: string;
 }
 
-export function Footer({ phoneDisplay, phoneWhatsappUrl }: FooterProps = {}) {
+export function Footer({ phoneDisplay, phoneWhatsappUrl, logoWhiteSrc }: FooterProps = {}) {
     const displayPhone = phoneDisplay ?? siteConfig.contact.phone.display;
     const callUrl = phoneWhatsappUrl ?? whatsappUrl;
+    const logoWhite = logoWhiteSrc ?? siteConfig.logo.white;
     const serviceLinks = siteConfig.content.footer.serviceLinks as readonly { name: string; href: string }[];
     return (
         <footer className="text-white" style={{ backgroundColor: 'var(--site-footer-bg)' }}>
@@ -35,7 +37,7 @@ export function Footer({ phoneDisplay, phoneWhatsappUrl }: FooterProps = {}) {
                     <div>
                         <div className="mb-6">
                             <Image
-                                src={siteConfig.logo.white}
+                                src={logoWhite}
                                 alt={siteConfig.brand.name}
                                 width={160}
                                 height={56}

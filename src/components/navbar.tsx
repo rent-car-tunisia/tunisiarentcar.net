@@ -9,14 +9,16 @@ import { CurrencyToggle } from "@/components/currency-toggle";
 interface NavbarProps {
     phoneDisplay?: string;
     phoneWhatsappUrl?: string;
+    logoSrc?: string;
 }
 
-export function Navbar({ phoneDisplay, phoneWhatsappUrl }: NavbarProps = {}) {
+export function Navbar({ phoneDisplay, phoneWhatsappUrl, logoSrc }: NavbarProps = {}) {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
     const displayPhone = phoneDisplay ?? siteConfig.contact.phone.display;
     const callUrl = phoneWhatsappUrl ?? whatsappUrl;
+    const logo = logoSrc ?? siteConfig.logo.main;
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -40,7 +42,7 @@ export function Navbar({ phoneDisplay, phoneWhatsappUrl }: NavbarProps = {}) {
                         {/* Brand Logo */}
                         <Link href="/" className="flex-shrink-0">
                             <Image
-                                src={siteConfig.logo.main}
+                                src={logo}
                                 alt={siteConfig.brand.name}
                                 width={160}
                                 height={56}
