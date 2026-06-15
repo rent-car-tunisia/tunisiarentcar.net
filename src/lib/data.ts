@@ -78,14 +78,54 @@ const FUEL_LABELS: Record<string, string> = {
     diesel: 'Diesel',
 };
 
+// Canonical car image set (public/images/cars-data/CARS-IMAGES), keyed by displayOrder.
+// The file number matches the seed displayOrder, so each car gets its own image.
+const CAR_IMAGE_BY_ORDER: Record<number, string> = {
+    1: '01_Suzuki_Swift.png', 2: '02_Hyundai_i10.png', 3: '03_RENAULT_CLIO.png',
+    4: '04_Volkswagen_Polo.png', 5: '05_Seat_Ibiza.png', 6: '06_Volkswagen_Polo_Sedan.png',
+    7: '07_Suzuki_SWIFT_BVA.png', 8: '08_Hyundai_i10_BVA.png', 9: '09_Skoda_Fabia.png',
+    10: '10_Volkswagen_Virtus.png', 11: '11_Seat_ibiza_BVA.png', 12: '12_Seat_Arona.png',
+    13: '13_Volkswagen_Virtus_BVA.png', 14: '14_Suzuki_Ertiga.png', 15: '15_Suzuki_Ciaz.png',
+    16: '16_Skoda_Scala.png', 17: '17_VW_GOLF_1.2.png', 18: '18_Skoda_Octavia.png',
+    19: '19_Seat_ATECA.png', 20: '20_Skoda_octavia_2024.png', 21: '21_VW_Transporter.png',
+};
+
+// Same set keyed by normalized "brand model", so reordering cars never breaks images.
+const CAR_IMAGE_BY_NAME: Record<string, string> = {
+    'suzuki swift': '01_Suzuki_Swift.png', 'hyundai i10': '02_Hyundai_i10.png',
+    'renault clio': '03_RENAULT_CLIO.png', 'volkswagen polo': '04_Volkswagen_Polo.png',
+    'seat ibiza': '05_Seat_Ibiza.png', 'volkswagen polo sedan': '06_Volkswagen_Polo_Sedan.png',
+    'suzuki swift bva': '07_Suzuki_SWIFT_BVA.png', 'hyundai i10 bva': '08_Hyundai_i10_BVA.png',
+    'skoda fabia': '09_Skoda_Fabia.png', 'volkswagen virtus': '10_Volkswagen_Virtus.png',
+    'seat ibiza bva': '11_Seat_ibiza_BVA.png', 'seat arona': '12_Seat_Arona.png',
+    'volkswagen virtus bva': '13_Volkswagen_Virtus_BVA.png', 'suzuki ertiga': '14_Suzuki_Ertiga.png',
+    'suzuki ciaz': '15_Suzuki_Ciaz.png', 'skoda scala': '16_Skoda_Scala.png',
+    'volkswagen golf 1 2': '17_VW_GOLF_1.2.png', 'skoda octavia': '18_Skoda_Octavia.png',
+    'seat ateca': '19_Seat_ATECA.png', 'skoda octavia 2024': '20_Skoda_octavia_2024.png',
+    'volkswagen transporter': '21_VW_Transporter.png',
+};
+
+function resolveCarImage(raw: BackendCar): string {
+    const p = (raw.imagePath || '').trim();
+    // 1. Admin-uploaded / absolute images win (http(s) or root-absolute path).
+    if (/^https?:\/\//i.test(p)) return p;
+    if (p.startsWith('/')) return p;
+    // 2. Explicit reference to the canonical set.
+    if (p.startsWith('CARS-IMAGES/')) return `/images/cars-data/${p}`;
+    // 3. Deterministic by car identity (name first, then displayOrder).
+    const name = `${raw.brand} ${raw.model}`.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    const byName = CAR_IMAGE_BY_NAME[name];
+    if (byName) return `/images/cars-data/CARS-IMAGES/${byName}`;
+    const byOrder = CAR_IMAGE_BY_ORDER[raw.displayOrder];
+    if (byOrder) return `/images/cars-data/CARS-IMAGES/${byOrder}`;
+    // 4. Last resort: generic placeholder (not a specific car).
+    return '/car-placeholder.png';
+}
+
 function transformBackendCar(raw: BackendCar): Car {
     const fullName = `${raw.brand} ${raw.model}`;
     const slug = slugify(fullName);
-    // imagePath from DB is like "CARS-IMAGES/01_Suzuki_Swift.png"
-    // or legacy "images/voitures/name.png" — both are relative to /images/cars-data/
-    const imagePath = raw.imagePath
-        ? (raw.imagePath.startsWith('/') ? raw.imagePath : `/images/cars-data/${raw.imagePath}`)
-        : `/images/cars-data/CARS-IMAGES/01_Suzuki_Swift.png`;
+    const imagePath = resolveCarImage(raw);
 
     const deposit = raw.deposit ? Math.round(parseFloat(raw.deposit)) : 2000;
     const transmissionFr = TRANSMISSION_LABELS[raw.transmission] || raw.transmission;

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -7,14 +7,14 @@ import { CurrencyProvider } from "@/context/currency-context";
 import { siteConfig, ogImageUrl } from "@/lib/site-config";
 import { getSiteConfig } from "@/lib/get-site-data";
 
-const playfair = Playfair_Display({
+const manrope = Manrope({
     subsets: ["latin"],
     weight: ["700", "800"],
     variable: "--font-headline",
     display: "swap",
 });
 
-const inter = Inter({
+const plusJakarta = Plus_Jakarta_Sans({
     subsets: ["latin"],
     weight: ["400", "500", "600", "700"],
     variable: "--font-body",
@@ -142,7 +142,7 @@ export default async function RootLayout({
                     />
                 </noscript>
             </head>
-            <body className={`${playfair.variable} ${inter.variable} font-body`}>
+            <body className={`${manrope.variable} ${plusJakarta.variable} font-body`}>
                 <CurrencyProvider>
                     <Navbar phoneDisplay={phoneDisplay} phoneWhatsappUrl={phoneWhatsappUrl} logoSrc={logoSrc} />
                     <main>{children}</main>

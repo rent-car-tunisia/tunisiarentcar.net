@@ -12,11 +12,11 @@ const config: Config = {
                 background: "#f7f9fc",
                 foreground: "#191c1e",
                 primary: {
-                    DEFAULT: "#00256f",
+                    DEFAULT: "var(--site-primary, #00256f)",
                     foreground: "#ffffff",
                 },
                 accent: {
-                    DEFAULT: "#00256f",
+                    DEFAULT: "var(--site-accent, #00256f)",
                     foreground: "#ffffff",
                 },
                 muted: {
