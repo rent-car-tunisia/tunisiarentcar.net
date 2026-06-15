@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const BACKEND_API_URL = process.env.BACKEND_API_URL || 'http://localhost:3001/api/v1';
 const SITE_SLUG = process.env.SITE_SLUG || 'locationvoitures-tunisie';
-const SITE_API_KEY = process.env.SITE_API_KEY || '';
+const SITE_API_KEY = (process.env.SITE_API_KEY || '').replace(/^﻿/, '').trim();
 
 /**
  * POST /api/bookings
