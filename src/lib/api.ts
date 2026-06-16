@@ -23,8 +23,8 @@ export async function backendFetch<T = unknown>(
             'X-Api-Key': SITE_API_KEY,
             ...options.headers,
         },
-        // No caching — always fetch fresh data from backend
-        cache: 'no-store',
+        // ISR: cache backend catalog/site data, revalidate every 5 minutes
+        next: { revalidate: 300 },
     });
 
     if (!response.ok) {
