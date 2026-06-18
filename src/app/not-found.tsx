@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { siteConfig, whatsappUrl } from '@/lib/site-config';
 
@@ -8,7 +10,7 @@ const t = {
         sub: "La page que vous recherchez n'existe pas ou a été déplacée.",
         cta1: 'Voir nos voitures',
         cta2: "Retour à l'accueil",
-        help: 'Besoin d\'aide ?',
+        help: 'Besoin d\'aide ?',
     },
     en: {
         badge: '404',
@@ -41,26 +43,15 @@ export default function NotFound() {
             <div className="flex flex-col sm:flex-row gap-3">
                 <Link
                     href="/nos-voitures"
-                    className="px-7 py-3 rounded-xl font-bold text-white transition hover:opacity-90"
+                    className="px-7 py-3 rounded-xl font-bold text-white transition-opacity hover:opacity-90"
                     style={{ background: 'var(--site-primary)' }}
                 >
                     {c.cta1}
                 </Link>
                 <Link
                     href="/"
-                    className="px-7 py-3 rounded-xl font-bold border-2 transition hover:text-white"
-                    style={{
-                        borderColor: 'var(--site-primary)',
-                        color: 'var(--site-primary)',
-                    }}
-                    onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLAnchorElement).style.background = 'var(--site-primary)';
-                        (e.currentTarget as HTMLAnchorElement).style.color = '#fff';
-                    }}
-                    onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLAnchorElement).style.background = '';
-                        (e.currentTarget as HTMLAnchorElement).style.color = 'var(--site-primary)';
-                    }}
+                    className="px-7 py-3 rounded-xl font-bold border-2 transition"
+                    style={{ borderColor: 'var(--site-primary)', color: 'var(--site-primary)' }}
                 >
                     {c.cta2}
                 </Link>

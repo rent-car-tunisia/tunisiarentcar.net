@@ -106,6 +106,11 @@ export default async function RootLayout({
     return (
         <html lang={siteConfig.lang} suppressHydrationWarning>
             <head>
+                {/* Geographic meta tags for local SEO */}
+                <meta name="geo.region" content="TN" />
+                <meta name="geo.placename" content={`${siteConfig.contact.address.city}, Tunisia`} />
+                <meta name="geo.position" content={`${siteConfig.contact.geo.latitude};${siteConfig.contact.geo.longitude}`} />
+                <meta name="ICBM" content={`${siteConfig.contact.geo.latitude}, ${siteConfig.contact.geo.longitude}`} />
                 {/* Site brand CSS variables — drives all themed colors */}
                 <style>{`
                     :root {
